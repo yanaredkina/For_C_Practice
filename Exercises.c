@@ -48,13 +48,13 @@ unsigned int power_of_two(unsigned int n) {
 
 int main () {
     
-    /* N 2.29 */
-    printf("new value = %u\n", mov_nbit(3758096384,3));
+    /* 2.29 */
+    printf("2.29: new value = %u\n", mov_nbit(3758096384,3));
     
     /* 3.21 */
-    printf("number of digits = %u\n", get_digit(22));
+    printf("3.21: number of digits = %u\n", get_digit(22));
     
     /* 3.31 */
-    printf("2r = %u\n", power_of_two(23));
+    printf("3.31: n < %u\n", power_of_two(23));
 
 }
