@@ -57,4 +57,24 @@ int main () {
     /* 3.31 */
     printf("3.31: n < %u\n", power_of_two(23));
 
+
+/* 5.7. Что напечатает следующая программа? */
+    
+    char str[ ] = "SSSWILTECH1\1\11W\1WALLMP1";
+    
+    printf("5.7: ");
+        
+    int i, c;
+    for ( i = 2; ( c = str [ i ] ) != '\0'; i++) {
+    switch (c) {
+    case 'a': putchar('i'); continue;
+    case '1': break;
+    case 1: while ( ( c = str [++ i ] ) != '\1' && c != '\0'); 
+    case 9: putchar('S');
+    case 'E': case 'L': continue;
+    default: putchar(c); continue; }
+    putchar(' '); } putchar('\n');
+    
+    /* Results: SWITCH SWAMP */
+    
 }
