@@ -65,16 +65,55 @@ int main () {
     printf("5.7: ");
         
     int i, c;
-    for ( i = 2; ( c = str [ i ] ) != '\0'; i++) {
-    switch (c) {
-    case 'a': putchar('i'); continue;
-    case '1': break;
-    case 1: while ( ( c = str [++ i ] ) != '\1' && c != '\0'); 
-    case 9: putchar('S');
-    case 'E': case 'L': continue;
-    default: putchar(c); continue; }
-    putchar(' '); } putchar('\n');
+     for (i = 2; (c = str [i]) != '\0'; i++) { 
+         switch (c) {
+         case 'a':
+             putchar('i');
+             continue;
+         case '1':
+             break;
+         case 1:
+             while ((c = str [++i]) != '\1' && c != '\0');
+         case 9:
+             putchar('S');
+         case 'E':
+         case 'L':
+             continue;
+         default:
+             putchar(c); 
+             continue;
+         } 
+         putchar(' ');
+     }
+     putchar('\n'); 
     
     /* Results: SWITCH SWAMP */
     
+/* 5.10. Что напечатает следующая программа? */
+    
+    printf("5.10: \n");
+    
+     int a[3][3] = {
+         { 1, 2, 3 },
+         { 4, 5, 6 },
+         { 7, 8, 9 }
+     };
+
+     int *pa[3] = {a[0], a[1], a[2]};
+     int *p = a[0];
+
+     for (i = 0; i < 3; i++) {
+         printf(" a[ i ][ 2 – i ]=%d *a[ i ]=%d *(*(a+i)+i)=%d\n", a[i][2 - i], *a[i], *(*(a + i) + i));
+     }
+     for (i = 0; i < 3; i++) {
+         printf("*pa[ i ]=%d p[ i ]=%d \n", *pa[i], p[i]);
+     }
+     
+
+     /*Results:  a[ i ][ 2 – i ]=3 *a[ i ]=1 *(*(a+i)+i)=1
+                 a[ i ][ 2 – i ]=5 *a[ i ]=4 *(*(a+i)+i)=5
+                 a[ i ][ 2 – i ]=7 *a[ i ]=7 *(*(a+i)+i)=9
+                *pa[ i ]=1 p[ i ]=1 
+                *pa[ i ]=4 p[ i ]=2 
+                *pa[ i ]=7 p[ i ]=3 */
 }
