@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 
 /* N 2.29 - Циклически сдвинуть значение целочисленной величины на n позиций влево */
 unsigned int mov_nbit(unsigned int x, unsigned char n) {
@@ -46,17 +47,63 @@ unsigned int power_of_two(unsigned int n) {
     return 2 << (power_count); /* pow(2,power_count+1) */
 }
 
+/* 5.33. Программа. Описать функцию f(s, n, x), определяющую, какой символ реже других (но не нуль раз) встречается в строке s и сколько раз он в нее входит. 
+         Если таких символов несколько, то взять первый из них по алфавиту. С помощью этой функции провести анализ строки str */
+
+void get_raresymbol(char s[], unsigned int *n, unsigned int *x) {
+    int i;
+    unsigned int symb[255];
+    
+    for (i = 0; i <= 255; i++) {
+        symb[i] = 0;
+    }
+    
+    i = 0;
+    while (s[i] != '\0') {
+        symb[s[i]]++;
+        i++;
+    }
+    
+    unsigned int min, indx;
+    min = strlen(s);
+    
+    for (i = 0; i <= 255; i++) {
+        if ( (symb[i] != 0) && (symb[i] < min)) {
+            min = symb[i];
+            printf("new min = %u\n", min);
+            indx = i;
+        }
+    }
+   
+    *x = indx;
+    *n = min;
+    
+ }   
+
+/* ----------------------------------- MAIN ------------------------------ */
 int main () {
     
     /* 2.29 */
     printf("2.29: new value = %u\n", mov_nbit(3758096384,3));
+    /* Results: new value = 7 */
     
     /* 3.21 */
     printf("3.21: number of digits = %u\n", get_digit(22));
+    /* Results: number of digits = 2 */
     
     /* 3.31 */
     printf("3.31: n < %u\n", power_of_two(23));
-
+    /* Results: n < 32 */
+    
+    /* 5.33 */
+    char strg[ ] = "sabyyaaabbs";
+    unsigned int x, n;
+    
+    get_raresymbol(strg, &n, &x);
+    printf("5.33: strg = %s\n", strg);
+    printf("x=%c, n=%u\n", x, n);
+    
+    /* Results: x=s, n=2*/
 
 /* 5.7. Что напечатает следующая программа? */
     
@@ -116,4 +163,5 @@ int main () {
                 *pa[ i ]=1 p[ i ]=1 
                 *pa[ i ]=4 p[ i ]=2 
                 *pa[ i ]=7 p[ i ]=3 */
+     
 }
