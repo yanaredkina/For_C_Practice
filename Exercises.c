@@ -1,4 +1,4 @@
-/* VVO-2course- Redkina Yana - Exercises from textbook RUDENKO*/
+/* VVO-2course- Redkina Yana - Exercises from textbook RUDENKO */
 
 #include <stdio.h>
 #include <math.h>
@@ -80,6 +80,7 @@ void get_raresymbol(char s[], unsigned int *n, unsigned int *x) {
  }   
 
 /* ----------------------------------- MAIN ------------------------------ */
+ 
 int main () {
     
     /* 2.29 */
