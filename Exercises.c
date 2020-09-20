@@ -70,7 +70,6 @@ void get_raresymbol(char s[], unsigned int *n, unsigned int *x) {
     for (i = 0; i <= 255; i++) {
         if ( (symb[i] != 0) && (symb[i] < min)) {
             min = symb[i];
-            printf("new min = %u\n", min);
             indx = i;
         }
     }
