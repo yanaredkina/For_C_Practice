@@ -3,18 +3,17 @@
 #include <stdio.h>
 
 int main () {
-    
     double x, a;
 
-    printf("input x: \n");
+    printf("input x and a(i): \n");
     scanf("%lf", &x);
-    
-    printf("input a(i): \n");
-    
-    double res = 0;
+
+    double polynom = 0, derivative = 0; 
+
     while (scanf("%lf", &a) == 1) {
-        res = a + res * x;
+        derivative = derivative * x + polynom;
+        polynom = a + polynom * x;
     }
     
-    printf(" Horner's method Polynomial value is =  %.10g\n", res);
+    printf("Horner's method Polynomial value = %.10g, its derivative = %.10g\n", polynom, derivative);
 }
