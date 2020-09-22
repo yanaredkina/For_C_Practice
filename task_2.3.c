@@ -11,12 +11,12 @@ int iter_fibonacci(int i) {
         return 1;
     }
     int f1 = 0, f2 = 1, f_cur; 
-    for (int j = 2; j <= i; j++){
+    for (int j = 2; j <= i; j++) {
         f_cur = f1 + f2;
         f1 = f2;
         f2 = f_cur;
     }
-    return  f_cur;
+    return f_cur;
 }
 
 int recurs_fibonacci(int i) {
@@ -27,9 +27,7 @@ int recurs_fibonacci(int i) {
         return 1;
     }
     
-    int res;
-    res = recurs_fibonacci(i - 2) + recurs_fibonacci(i - 1);
-    return res;
+    return recurs_fibonacci(i - 2) + recurs_fibonacci(i - 1);
 }
 
 int main() {
@@ -40,8 +38,16 @@ int main() {
 
     while (scanf("%d", &i) != EOF) {
         if (i >= 0) {
-            printf("fibonacci number (iteration function) = %d\n", iter_fibonacci(i));
-            printf("fibonacci number (recursive function) = %d\n", recurs_fibonacci(i));
+            clock_t start = clock();
+            int value = iter_fibonacci(i);
+            clock_t end = clock();
+            double duration = ((double) end - start) / CLOCKS_PER_SEC;
+            printf("fibonacci number (iteration function) = %d, took %f seconds to execute\n", value, duration);
+            
+            start = clock();
+            value = recurs_fibonacci(i);
+            duration = ((double) end - start) / CLOCKS_PER_SEC;
+            printf("fibonacci number (recursive function) = %d, took %f seconds to execute\n", value, duration);
         } else {
             printf("incorrect number, try again\n");
         }
