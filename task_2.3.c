@@ -31,24 +31,24 @@ unsigned long int recurs_fibonacci(int i) {
 
 int main() {
     
-    int i;
     printf("input number i >= 0: \n");
-
+    
+    int i;
     while (scanf("%d", &i) != EOF) {
-        if (i >= 0) {
-            clock_t start = clock();
-            unsigned long int value = iter_fibonacci(i);
-            clock_t end = clock();
-            double duration = ((double) end - start) / CLOCKS_PER_SEC;
-            printf("fibonacci number (iteration function) = %lu, took %f seconds to execute\n", value, duration);
-            
-            start = clock();
-            value = recurs_fibonacci(i);
-            end = clock();
-            duration = ((double) end - start) / CLOCKS_PER_SEC;
-            printf("fibonacci number (recursive function) = %lu, took %f seconds to execute\n", value, duration);
-        } else {
+        if (i < 0) {
             printf("incorrect number, try again\n");
+            continue;
         }
+        clock_t start = clock();
+        unsigned long int value = iter_fibonacci(i);
+        clock_t end = clock();
+        double duration = ((double) end - start) / CLOCKS_PER_SEC;
+        printf("fibonacci number (iteration function) = %lu, took %f seconds to execute\n", value, duration);
+        
+        start = clock();
+        value = recurs_fibonacci(i);
+        end = clock();
+        duration = ((double) end - start) / CLOCKS_PER_SEC;
+        printf("fibonacci number (recursive function) = %lu, took %f seconds to execute\n", value, duration);
     } 
 }
