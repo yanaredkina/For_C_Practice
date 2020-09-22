@@ -24,7 +24,7 @@ int main () {
     scanf("%lf", &eps);
     
     printf("input x: \n");
-    while (scanf("%lf", &x) == 1) {
+    while (scanf("%lf", &x) != EOF) {
          printf("sqrt from x is = %.10g\n", sqrt_newton(x, eps));
     }
 }
