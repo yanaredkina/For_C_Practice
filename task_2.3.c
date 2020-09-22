@@ -30,7 +30,6 @@ unsigned long int recurs_fibonacci(int i) {
 }
 
 int main() {
-    
     printf("input number i >= 0: \n");
     
     int i;
@@ -39,6 +38,7 @@ int main() {
             printf("incorrect number, try again\n");
             continue;
         }
+        
         clock_t start = clock();
         unsigned long int value = iter_fibonacci(i);
         clock_t end = clock();
