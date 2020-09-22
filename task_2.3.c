@@ -26,14 +26,12 @@ int recurs_fibonacci(int i) {
     if (i == 1) {
         return 1;
     }
-    
     return recurs_fibonacci(i - 2) + recurs_fibonacci(i - 1);
 }
 
 int main() {
     
     int i;
-    
     printf("input number i >= 0: \n");
 
     while (scanf("%d", &i) != EOF) {
@@ -46,11 +44,11 @@ int main() {
             
             start = clock();
             value = recurs_fibonacci(i);
+            end = clock();
             duration = ((double) end - start) / CLOCKS_PER_SEC;
             printf("fibonacci number (recursive function) = %d, took %f seconds to execute\n", value, duration);
         } else {
             printf("incorrect number, try again\n");
         }
-    }
-    
+    } 
 }
