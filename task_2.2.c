@@ -10,7 +10,7 @@ int main () {
 
     double polynom = 0, derivative = 0; 
 
-    while (scanf("%lf", &a) == 1) {
+    while (scanf("%lf", &a) != EOF) {
         derivative = derivative * x + polynom;
         polynom = a + polynom * x;
     }
