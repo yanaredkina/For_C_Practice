@@ -18,8 +18,9 @@ int main () {
     printf("CHAR_MINIMUM=%d\n", CHAR_MIN);  
     printf("CHAR_MAXIMUM=%d\n", CHAR_MAX);
     
-    char ch = -1;
-    if (ch == 255)
+//    char ch = -1;
+//    if (ch == 255)
+    if (CHAR_MIN == 0)
         printf("unsigned char\n");
     else 
         printf("signed char\n");
