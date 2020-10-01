@@ -52,12 +52,12 @@ list lstCreate (char *s) {
 int main() {
     printf("Input words: \n");
     
-    char *str;
-    while ((*str = getchar()) != EOF){
-        str++;
-    }
-    
+    char str[1024];
+    int i = 0;
+    while ((str[i] = getchar()) != EOF){
+        i++;
+   }  
     printf("%s\n",str);
-    listPrt = lstCreate(str);
+    listPrt = lstCreate((char*)str);
     printf("%s\n", listPrt->word);
 }
