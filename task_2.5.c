@@ -36,14 +36,12 @@ list lstCreate(char *s) {
             i++;
             s++;
             }
-            
-        curlnk->word[i] = '\0';
              
         while ((*s == ' ') || (*s == '\t')) {
         s++;
         }
         
-        if (*s == '\0') {
+        if ((*s == '\0') || (*s == '\n')) {
             curlnk->next = NULL;
             break;
         }  
@@ -85,8 +83,7 @@ list delSameAsLast(list lst){
     cur = lst;
     list prev = cur; 
     while (cur->next != NULL) {
-        if (strcmp (sample, cur->word) == 0) {  /* ??????????????????? */
-            printf("yes");
+        if (strcmp (sample, cur->word) == 0) {
             if (cur == lst) {
                 lst = lst->next;
                 free(cur);
@@ -108,24 +105,25 @@ list delSameAsLast(list lst){
 }
 
 /*--------------------------------------*/
+/*--------------------------------------*/
 
 int main() {
     printf("Input words: \n");
     
-    char str[1024];
+    char buf[1024];
+    char chr;
     int i = 0;
-    while (1) {
-        char chr = getchar();
-        if (chr == EOF) {
-            break;
-         }
-         str[i++] = chr;
-     }
-     
-    listOrig = lstCreate(str);
-    lstPrint(listOrig);
-    
-    listModif = delSameAsLast(listOrig);
-    lstPrint(listModif);
-        
+    while ((chr = getchar()) != EOF) {
+        if (chr != '\n') {
+            buf[i++] = chr;
+         } else {
+             listOrig = lstCreate(buf);
+             putchar('\n');
+             printf("Modified List:\n");
+             listModif = delSameAsLast(listOrig);
+             lstPrint(listModif);
+             i = 0;
+             continue;
+         }         
+     }     
 }
