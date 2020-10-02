@@ -10,24 +10,19 @@ typedef struct Node {
     link next;
 } node;
 typedef link list;
-list listOrig, listModif;
-
 
 /*--------------------------------------*/
 
 list lstCreate(char *s) {
-    link curlnk;
-    list lst;
-    
     while ((*s == ' ') || (*s == '\t')) {
-    s++;
+        s++;
     }
     if (*s == '\0') {
         return NULL;
     }
     
-    lst = (link) malloc (sizeof (node));
-    curlnk = lst;
+    list lst = (link) malloc (sizeof (node));
+    link curlnk = lst;
     
     while (*s != '\0') {
         int i = 0;
@@ -117,13 +112,12 @@ int main() {
         if (chr != '\n') {
             buf[i++] = chr;
          } else {
-             listOrig = lstCreate(buf);
+             list listOrig = lstCreate(buf);
              putchar('\n');
              printf("Modified List:\n");
-             listModif = delSameAsLast(listOrig);
+             list listModif = delSameAsLast(listOrig);
              lstPrint(listModif);
              i = 0;
-             continue;
          }         
      }     
 }
