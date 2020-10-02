@@ -4,16 +4,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct Node *link; 
+typedef struct Node *Link; 
 typedef struct Node {
     char word[50];
-    link next;
+    Link next;
 } node;
-typedef link list;
 
 /*--------------------------------------*/
 
-list lstCreate(char *s) {
+Link lstCreate(char *s) {
     while ((*s == ' ') || (*s == '\t')) {
         s++;
     }
@@ -21,8 +20,8 @@ list lstCreate(char *s) {
         return NULL;
     }
     
-    list lst = (link) malloc (sizeof (node));
-    link curlnk = lst;
+    Link list = (Link) malloc(sizeof(node));
+    Link curlnk = list;
     
     while (*s != '\0') {
         int i = 0;
@@ -30,10 +29,10 @@ list lstCreate(char *s) {
             curlnk->word[i] = *s;
             i++;
             s++;
-            }
+        }
              
         while ((*s == ' ') || (*s == '\t')) {
-        s++;
+            s++;
         }
         
         if ((*s == '\0') || (*s == '\n')) {
@@ -41,62 +40,60 @@ list lstCreate(char *s) {
             break;
         }  
         
-        curlnk->next = (list) malloc(sizeof (node));
+        curlnk->next = (Link) malloc(sizeof(node));
         curlnk = curlnk->next;        
     }
-    return lst;
+    return list;
 }
 /*--------------------------------------*/
 
-void lstPrint(list lst) {
-    while (lst != NULL) {
-        printf("%s ", lst->word);
-        lst = lst->next;
+void lstPrint(Link list) {
+    while (list != NULL) {
+        printf("%s ", list->word);
+        list = list->next;
     }
     putchar('\n');
 }
 
 /*--------------------------------------*/
 
-list delSameAsLast(list lst){
-    if (lst == NULL) {
+Link delSameAsLast(Link list){
+    if (list == NULL) {
         return 0;
     }
     
-    if (lst->next == NULL) {
-        return lst;
+    if (list->next == NULL) {
+        return list;
     }
     
-    char sample[50];
-    list cur = lst;
-    
+    Link cur = list;
     while (cur->next != NULL) {
         cur = cur->next;
     }
+    
+    char sample[50];
     strcpy(sample, cur->word);
     
-    cur = lst;
-    list prev = cur; 
+    cur = list;
+    Link prev = cur; 
     while (cur->next != NULL) {
-        if (strcmp (sample, cur->word) == 0) {
-            if (cur == lst) {
-                lst = lst->next;
+        if (strcmp(sample, cur->word) == 0) {
+            if (cur == list) {
+                list = list->next;
                 free(cur);
-                cur = lst;
+                cur = list;
                 prev = cur;
-            } else {    /*(cur != lst)*/
+            } else {
                 prev->next = cur->next;
                 free(cur);
                 cur = prev->next;
             }
-
         } else {
             prev = cur;
             cur = cur->next; 
         }
-
     }
-    return lst;
+    return list;
 }
 
 /*--------------------------------------*/
@@ -112,10 +109,10 @@ int main() {
         if (chr != '\n') {
             buf[i++] = chr;
          } else {
-             list listOrig = lstCreate(buf);
+             Link listOrig = lstCreate(buf);
              putchar('\n');
              printf("Modified List:\n");
-             list listModif = delSameAsLast(listOrig);
+             Link listModif = delSameAsLast(listOrig);
              lstPrint(listModif);
              i = 0;
          }         
