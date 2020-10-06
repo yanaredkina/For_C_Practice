@@ -38,10 +38,80 @@ TrLink treeAdd(TrLink tree, unsigned int key) {
     return tree;
 }
 
+/*--------------------------------------*/
 
-//TrLink treeDel(TrLink tree, unsigned int key);
+TrLink treeDel(TrLink tree, unsigned int key){
+    if (tree == NULL) {
+        return tree;
+    }
+    
+    if (tree->elem == key) {
+        if ((tree->left) == NULL && (tree->right) == NULL) {
+            free(tree);
+            tree = NULL;
+            return tree;
+        } else if ((tree->left) == NULL) {
+            TrLink tmp = tree;
+            tree = tree->right;
+            free(tmp);
+            tmp = NULL;
+            return tree;
+        } else if (tree->right) == NULL) {
+            tmp = tree;
+            tree = tree->left;
+            free(tmp);
+            tmp = NULL;
+            return tree;
+        } else {
+            tmp = tree->left;
+            while (tmp->right != NULL){
+                tmp = tmp->right;
+            }
+            if ((tmp->left) = NULL) {
+                tree->elem = tmp->elem;
+                free(tmp);
+                tmp = NULL;
+                return tree;
+            } else {
+                tree->elem = tmp->elem;
+                tmp->elem = tmp->left->elem;
+                free(tmp->left);
+                tmp->left = NULL;
+                return tree;
+            }
+        }
+    }
+    
+    if (tree->elem > key) {
+        tree->left = treeDel(tree->left, key);
+    } else {
+        tree->right = treeDel(tree->right, key);
+    }
+    return tree;
+}
 
-//void treeScan(TrLink tree, unsigned int key);
+/*--------------------------------------*/
+
+void treeScan(TrLink tree, unsigned int key) {
+    if (tree == NULL) {
+        return;
+    }
+    
+    while (tree != NULL) {
+        if (tree->elem == key) {
+            printf("%u yes", key);
+            putchar('\n');
+            return;
+        } else if (tree->elem > key) {
+            tree = tree->left;
+        } else if (tree->elem < key) {
+            tree = tree->right;
+        }
+    }
+    printf("%u no", key);
+    putchar('\n');
+    return;
+}
 
 /*--------------------------------------*/
 
@@ -135,10 +205,14 @@ int main() {
 
             if (op == add) {
                 curtree = treeAdd(curtree, collectNum);
-//            } else if (op == delete) {
-//                curtree = treeAdd(curtree, collectNum);
-//            } else if (op == query) {
-//                treeScan(curtree, collectNum);
+                printf("adding nodes to tree: \n");
+                treePrint(curtree);
+            } else if (op == delete) {
+                curtree = treedel(curtree, collectNum);
+                printf("deleting nodes from tree: \n");
+                treePrint(curtree);
+            } else if (op == query) {
+                treeScan(curtree, collectNum);
             }
 
             op = add;
@@ -147,6 +221,4 @@ int main() {
             break;
         }  
     }
-    
-    treePrint(curtree);
 }

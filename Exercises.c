@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
+#include <ctype.h>
 
 /* N 2.29 - Циклически сдвинуть значение целочисленной величины на n позиций влево */
 unsigned int mov_nbit(unsigned int x, unsigned char n) {
@@ -164,4 +165,30 @@ int main () {
                 *pa[ i ]=4 p[ i ]=2 
                 *pa[ i ]=7 p[ i ]=3 */
      
-}
+     /* Из домашней контрольной */
+     
+     char string[1024];
+     int k = 0;
+     char chr;
+     int res = 0;
+     while ((chr = getchar()) != EOF) {
+         if (chr == ' ') {
+             continue;
+         }
+         string[k] = tolower(chr);
+         k++;
+     }
+     k--;
+     int l = 0;
+     while (l <= k/2) {
+         int m = k;
+         if (string[l++] == string[m--]) {
+             res = 1;
+         } else {
+             res = 0;
+             break;
+         }
+     }    
+     (res) ? printf("yes\n"): printf("no\n");  
+     
+}     
