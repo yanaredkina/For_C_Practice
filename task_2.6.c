@@ -25,9 +25,9 @@ TrLink treeAdd(TrLink tree, unsigned int key) {
         return tree;
     }
     if (tree->elem > key) {
-        treeAdd(tree->left, key);
+        tree->left = treeAdd(tree->left, key);
     } else {
-        treeAdd(tree->right, key);
+        tree->right = treeAdd(tree->right, key);
     }   
 return tree;
 }
@@ -44,11 +44,10 @@ void treePrint(TrLink tree) {
         return;
     }
     treePrint(tree->left);
-    printf("%u ", tree->elem);
-    
+    printf(" %u ", tree->elem);
     treePrint(tree->right);
-    printf("%u ", tree->elem);
     
+    return;
     putchar('\n');
 }
 
