@@ -46,55 +46,41 @@ TrLink treeDel(TrLink tree, unsigned int key){
     }
     
     if (tree->elem == key) {
-        if ((tree->left) == NULL && (tree->right) == NULL) {
-            printf("no children; ");
+        if ((tree->left) == NULL && (tree->right) == NULL) { /* the node has no descendants */
             free(tree);
-            tree = NULL;
-            return tree;
-        } else if ((tree->left) == NULL) {
-            printf("only right child; ");
+            return NULL;
+        } else if ((tree->left) == NULL) { /* the node has only right descendant */
             TrLink tmp = tree;
             tree = tree->right;
             free(tmp);
-            tmp = NULL;
             return tree;
-        } else if ((tree->right) == NULL) {
-            printf("only left child; ");
+        } else if ((tree->right) == NULL) { /* the node has only left descendant */
             TrLink tmp = tree;
             tree = tree->left;
             free(tmp);
-            tmp = NULL;
             return tree;
-        } else {
-            printf("both children; ");
+        } else { /* the node has both descendants */
             TrLink ptr = tree->left;
-            if (ptr->right == NULL) {
-                printf("left node is max; ");
+            if (ptr->right == NULL) { /* left descendant of node is max */
                 tree->elem = ptr->elem;
                 tree->left = ptr->left;
                 free(ptr);
-                ptr = NULL;
                 return tree;
-            } else {
-                printf("diving to the right;");
+            } else { /* diving to the branch of left descendant to search max */
                 TrLink prev = ptr;
-                while (ptr->right != NULL){
+                while (ptr->right != NULL) {
                     prev = ptr;
                     ptr = ptr->right;
                 }
-                if ((ptr->left) == NULL) {
-                    printf("max right node doesnt have left child; ");
+                if ((ptr->left) == NULL) { /* max subnode has no left descendant */
                     tree->elem = ptr->elem;
                     free(ptr);
-                    ptr = NULL;
                     prev->right = NULL;
                     return tree;
-                } else {
-                    printf("max right node have left child; ");
+                } else { /* max subnode hasleft descendant */
                     tree->elem = ptr->elem;
                     prev->right = ptr->left;
                     free(ptr);
-                    ptr = NULL;
                     return tree;
                 }
             }
@@ -240,4 +226,5 @@ int main() {
             break;
         }  
     }
+    return 0;
 }
