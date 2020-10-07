@@ -47,37 +47,56 @@ TrLink treeDel(TrLink tree, unsigned int key){
     
     if (tree->elem == key) {
         if ((tree->left) == NULL && (tree->right) == NULL) {
+            printf("no children; ");
             free(tree);
             tree = NULL;
             return tree;
         } else if ((tree->left) == NULL) {
+            printf("only right child; ");
             TrLink tmp = tree;
             tree = tree->right;
             free(tmp);
             tmp = NULL;
             return tree;
-        } else if (tree->right) == NULL) {
-            tmp = tree;
+        } else if ((tree->right) == NULL) {
+            printf("only left child; ");
+            TrLink tmp = tree;
             tree = tree->left;
             free(tmp);
             tmp = NULL;
             return tree;
         } else {
-            tmp = tree->left;
-            while (tmp->right != NULL){
-                tmp = tmp->right;
-            }
-            if ((tmp->left) = NULL) {
-                tree->elem = tmp->elem;
-                free(tmp);
-                tmp = NULL;
+            printf("both children; ");
+            TrLink ptr = tree->left;
+            if (ptr->right == NULL) {
+                printf("left node is max; ");
+                tree->elem = ptr->elem;
+                tree->left = ptr->left;
+                free(ptr);
+                ptr = NULL;
                 return tree;
             } else {
-                tree->elem = tmp->elem;
-                tmp->elem = tmp->left->elem;
-                free(tmp->left);
-                tmp->left = NULL;
-                return tree;
+                printf("diving to the right;");
+                TrLink prev = ptr;
+                while (ptr->right != NULL){
+                    prev = ptr;
+                    ptr = ptr->right;
+                }
+                if ((ptr->left) == NULL) {
+                    printf("max right node doesnt have left child; ");
+                    tree->elem = ptr->elem;
+                    free(ptr);
+                    ptr = NULL;
+                    prev->right = NULL;
+                    return tree;
+                } else {
+                    printf("max right node have left child; ");
+                    tree->elem = ptr->elem;
+                    prev->right = ptr->left;
+                    free(ptr);
+                    ptr = NULL;
+                    return tree;
+                }
             }
         }
     }
@@ -208,7 +227,7 @@ int main() {
                 printf("adding nodes to tree: \n");
                 treePrint(curtree);
             } else if (op == delete) {
-                curtree = treedel(curtree, collectNum);
+                curtree = treeDel(curtree, collectNum);
                 printf("deleting nodes from tree: \n");
                 treePrint(curtree);
             } else if (op == query) {
