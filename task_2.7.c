@@ -81,7 +81,7 @@ int div() {
     while (curlex == '^') {
         getlex();
         count = div();
-        }
+    }
     for (int i = 1; i < count; i++) {
         d *= d;
     }
