@@ -100,8 +100,8 @@ Link delSameAsLast(Link list){
 /*--------------------------------------*/
 
 int main() {
-    printf("Input words: \n");
     
+    printf("Input words: \n");
     char buf[1024];
     char chr;
     int i = 0;
@@ -110,11 +110,15 @@ int main() {
             buf[i++] = chr;
          } else {
              Link listOrig = lstCreate(buf);
-             putchar('\n');
              printf("Modified List:\n");
              Link listModif = delSameAsLast(listOrig);
              lstPrint(listModif);
+             for (int j = 0; j < i; j++) {
+                 buf[j] = 0;
+             }
              i = 0;
+             putchar('\n');
+             printf("Input words: \n");  
          }         
      }     
 }

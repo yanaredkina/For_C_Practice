@@ -125,17 +125,24 @@ void doTreePrint(TrLink tree, bool printEOL) {
     if (tree == NULL) {
         return;
     }
+    
+    if (printEOL) {
+        printf("[");
+    }
 
     doTreePrint(tree->left, false);
     printf(" %u ", tree->elem);
     doTreePrint(tree->right, false);
     
     if (printEOL) {
-        putchar('\n');
+        printf("]\n");
     }
 }
 
 void treePrint(TrLink tree) {
+    if (tree == NULL) {
+        printf("[ ]");
+    }
     doTreePrint(tree, true);
 }
 
@@ -210,12 +217,8 @@ int main() {
 
             if (op == add) {
                 curtree = treeAdd(curtree, collectNum);
-                printf("adding nodes to tree: \n");
-                treePrint(curtree);
             } else if (op == delete) {
                 curtree = treeDel(curtree, collectNum);
-                printf("deleting nodes from tree: \n");
-                treePrint(curtree);
             } else if (op == query) {
                 treeScan(curtree, collectNum);
             }
@@ -223,8 +226,12 @@ int main() {
             op = add;
             collectNum = 0;
             numLen = 0;
+            
+            if (chr == '\n') {
+                treePrint(curtree);
+            } 
             break;
-        }  
+        }
     }
     return 0;
 }
