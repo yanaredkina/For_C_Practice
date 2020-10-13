@@ -7,11 +7,9 @@ jmp_buf begin;
 char curlex;
 void getlex(void);
 int expr(void);
-int add(void);
-int sub(void);
-int mult(void);
-int div(void);
-int expon(void);
+int mul(void);
+int expo(void);
+int term(void);
 void error();
 
 int main() {
@@ -40,55 +38,47 @@ void error(void) {
 }
 
 int expr(void) {
-    int e = add();
-    while (curlex == '+') {
-        getlex(); 
-        e += add();
+    int e = mul();
+    while (curlex == '+' || curlex == '-') {
+        char op = curlex;
+        getlex();
+        if (op == '+') {
+            e += mul();
+        } else {
+            e -= mul();
+        }
     }
     return e;
 }
 
-int add() {
-    int a = sub();
-    while (curlex == '-') {
+int mul() {
+    int e = expo();
+    while (curlex == '*' || curlex == '/') {
+        char op = curlex;
         getlex();
-        a -= sub();
+        if (op == '*') {
+            e *= expo();
+        } else {
+            e /= expo();
+        }
     }
-    return a;
+    return e;
 }
 
-int sub() {
-    int s = mult();
-    while (curlex == '*') {
-        getlex();
-        s *= mult();
-    }
-    return s;
-}
-
-int mult() {
-    int m = div();
-    while (curlex == '/') {
-        getlex();
-        m /= div();
-    }
-    return m;
-}
-
-int div() {
-    int d = expon();
-    int count = 1;
+int expo() {
+    int d = term();
     while (curlex == '^') {
         getlex();
-        count = div();
-    }
-    for (int i = 1; i < count; i++) {
-        d *= d;
+        int count = expo();
+        int base = d;
+        for (int i = 1; i < count; i++) {
+            d *= base;
+        }       
     }
     return d;
 }
 
-int expon() {
+int term() {
     int ex;
     switch (curlex) {
         case '0':
