@@ -79,6 +79,47 @@ void get_raresymbol(char s[], unsigned int *n, unsigned int *x) {
     *n = min;
     
  }   
+ 
+/* 2.27. Заменить в целочисленной переменной x n бит, начиная с позиции p, n старшими инвертированными битами целочисленной переменной y */
+  
+ unsigned short nBitFromYtoX (unsigned short p, unsigned short n, unsigned short x, unsigned short y) {    
+     unsigned short int i, mask = 65535;
+     
+     for (i = 0; i < n; i++){ /* forming a mask (like this 111..000...11) */
+         mask <<=1; 
+     }
+     for (i = 0; i < p; i++) {
+         mask <<=1; 
+         mask +=1;
+     }
+     
+     x = x & mask; /* setting needed bits of X to zero */ 
+     
+     y = (~y);  /* inverting all bits of Y */ 
+     y = y >> (16-n) << p; /* shifting high bits of Y in needed position for X */
+     
+//     y = (~y) & (~mask); /* ALTERNATIVE SETTING: inverting needed bits of Y and setiing others bits of Y to zero */ 
+    
+     x = x | y; /* writing needed bits of Y to X*/ 
+     printf("x=%hu\n", x);
+     return x;
+ }
+ 
+ void fir_tree(int n) {
+     int i, j, k;
+     for (i=0; i<n; i++) { 
+         for(j=0; j<i+2; j++){
+             for(k=0; k<2*n+1; k++) {
+                 if ((k<n-j)||(k>n+j)) {
+                     printf(" ");
+                 } else {
+                     printf("*");
+                 }
+             }
+         printf("\n");
+         }
+     }
+ }
 
 /* ----------------------------------- MAIN ------------------------------ */
  
@@ -164,31 +205,12 @@ int main () {
                 *pa[ i ]=1 p[ i ]=1 
                 *pa[ i ]=4 p[ i ]=2 
                 *pa[ i ]=7 p[ i ]=3 */
+/* 2.27 */
+     nBitFromYtoX(4,2,125,165);   
+     /* Results: x=93 */      
      
-     /* Из домашней контрольной */
-     
-     char string[1024];
-     int k = 0;
-     char chr;
-     int res = 0;
-     while ((chr = getchar()) != EOF) {
-         if (chr == ' ') {
-             continue;
-         }
-         string[k] = tolower(chr);
-         k++;
-     }
-     k--;
-     int l = 0;
-     while (l <= k/2) {
-         int m = k;
-         if (string[l++] == string[m--]) {
-             res = 1;
-         } else {
-             res = 0;
-             break;
-         }
-     }    
-     (res) ? printf("yes\n"): printf("no\n");  
-     
+/* печать елочки */    
+    fir_tree(3);
+    
+    return 0;
 }     

@@ -98,9 +98,9 @@ TrLink treeDel(TrLink tree, unsigned int key){
 /*--------------------------------------*/
 
 void treeScan(TrLink tree, unsigned int key) {
-    if (tree == NULL) {
-        return;
-    }
+//    if (tree == NULL) {
+//        return;
+//    }
     
     while (tree != NULL) {
         if (tree->elem == key) {
@@ -141,7 +141,7 @@ void doTreePrint(TrLink tree, bool printEOL) {
 
 void treePrint(TrLink tree) {
     if (tree == NULL) {
-        printf("[ ]");
+        printf("[ ]\n");
     }
     doTreePrint(tree, true);
 }
