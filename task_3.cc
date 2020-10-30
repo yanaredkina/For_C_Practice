@@ -444,17 +444,33 @@ public:
     }
     
     void push(T operand) {
-    body[top] = operand;
-    top++;
-    cout << "was pushed: " << operand << endl;
+        if (top == size - 1) {
+            throw out_of_range("stack is full");
+        }
+        body[top] = operand;
+        top++;
+        cout << "was pushed: " << operand << endl;
     }
     
     T pop() {
-    top--;
-    cout << "was poped: " << body[top] << endl;
-    return body[top];
+        if (top == 0) {
+            throw out_of_range("stack is empty");
+        }
+        top--;
+        cout << "was poped: " << body[top] << endl;
+        return body[top];
     }
     
+    void print() {
+        cout << "[";
+        for (int i = 0; i <= top; i++) {
+            cout << body[i];
+            if (i < top) {
+                cout << ", ";
+            }
+        }
+        cout << " ]";
+    }
 };
 
 /*================================ MAIN =============================== */
@@ -464,21 +480,21 @@ int main () {
     cout << "\n --------------------- TESTING EXCEPTIONS AND ERRORS --------------------- \n" << endl;
     try {
         Box a(-10); /* n= -10 negative size of box */
-        cout << "box created" << endl;
+        cout << "error box was created" << endl;
     } catch (range_error& e) {
         cout << "ERROR " << e.what() << endl;
     }
     
     try {
         WBox b(3, 4, 4); /* n=3 size of box, win=4x4 size of window */
-        cout << "box created" << endl;
+        cout << "error box was created" << endl;
     } catch (range_error& e) {
         cout << "ERROR " << e.what() << endl;
     }
     
     try {
         HBox c(5, 10); /* n=5 size of box, hh=10 size of head */
-        cout << "box created" << endl;
+        cout << "error box was created" << endl;
     } catch (range_error& e) {
         cout << "ERROR " << e.what() << endl;
     }
@@ -552,13 +568,22 @@ int main () {
     Stack <int> stack2(16);
     Stack <int> stack3(stack2);
     
-    for (int i = 1; i < 4; i++) {
+    for (int i = 1; i < 5; i++) {
         stack1.push(i);
     }
+    stack1.print();
     
-    for (int i = 1; i < 4; i++) {
-        stack1.pop();
-    }    
+    try {
+        stack1.push(5);
+        cout << "something is wrong, pushed to a full stack" << endl;
+    } catch (out_of_range) {
+        cout << "push to full stack failed as expected" << endl;
+    }
+    
+    
+//    for (int i = 1; i < 4; i++) {
+//        stack1.pop();
+//    }    
     
     cout << "\n ------------------------- TESTING DESTRUCTORS  -------------------------- \n" << endl; 
     return 0;  
