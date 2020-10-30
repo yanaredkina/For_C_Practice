@@ -444,7 +444,7 @@ public:
     }
     
     void push(T operand) {
-        if (top == size - 1) {
+        if (top == size) {
             throw out_of_range("stack is full");
         }
         body[top] = operand;
@@ -462,14 +462,14 @@ public:
     }
     
     void print() {
-        cout << "[";
-        for (int i = 0; i <= top; i++) {
+        cout << "stack [";
+        for (int i = 0; i < top; i++) {
             cout << body[i];
-            if (i < top) {
+            if (i < top - 1) {
                 cout << ", ";
             }
         }
-        cout << " ]";
+        cout << "]" << endl;
     }
 };
 
@@ -499,7 +499,7 @@ int main () {
         cout << "ERROR " << e.what() << endl;
     }
     
-    cout << "\n ---------- TESTING BOX-CLASS CONSTRUCTORS, METHODS, AND OPERATIONS --------- \n" << endl;
+    cout << "\n --------- TESTING BOX-CLASS CONSTRUCTORS, METHODS, AND OPERATIONS -------- \n" << endl;
     Box box1;
     cout << "box1 by default: ";
     box1.print();
@@ -562,29 +562,40 @@ int main () {
     
     
     cout << " \n ------------- TESTING STACK-CLASS CONSTRUCTORS AND METHODS ------------- " << endl;
-    cout << " -------------------- ('i' for int, 'd' for double) --------------------\n " << endl;
+    cout << " -------------------- ('i' for int, 'd' for double) ---------------------\n " << endl;
     
     Stack <double> stack1;
     Stack <int> stack2(16);
     Stack <int> stack3(stack2);
     
     for (int i = 1; i < 5; i++) {
-        stack1.push(i);
+        stack1.push(i - 0.1);
     }
     stack1.print();
     
+    cout << "testing boarder condition (push fifth element to 4-element stack): " << endl;
     try {
         stack1.push(5);
         cout << "something is wrong, pushed to a full stack" << endl;
     } catch (out_of_range) {
-        cout << "push to full stack failed as expected" << endl;
+        cout << " ---> push to full stack failed as expected" << endl;
     }
     
+    for (int i = 1; i < 5; i++) {
+        stack1.pop();
+    }
+    stack1.print(); 
     
-//    for (int i = 1; i < 4; i++) {
-//        stack1.pop();
-//    }    
+    cout << "testing boarder condition (pop element from empty stack): " << endl;
+    try {
+        stack1.pop();
+        cout << "something is wrong, poped from an empty stack" << endl;
+    } catch (out_of_range) {
+        cout << " ---> pop from empty stack failed as expected" << endl;
+    }
     
-    cout << "\n ------------------------- TESTING DESTRUCTORS  -------------------------- \n" << endl; 
+    cout << "\n ------------------------- TESTING DESTRUCTORS  -------------------------- " << endl; 
+    cout << " --------- was created 3 objects of stack class, 1 of WHBox class -------- "<< endl;
+    cout << " ----------- 1 of HBox class, 1 of WBox class, 5 of Box class ------------ \n" << endl; 
     return 0;  
 }
