@@ -118,11 +118,11 @@ public:
     virtual void print() {
         cout << class_name() << "(";
         print_content();
-        cout << ")" << endl;
+        cout << ", area: " << area() << ")" << endl;
     }
     
     virtual void print_content() {
-       cout << "length: " << length << ", width: " << width << ", height: " << height << ", area: " << area();
+       cout << "length: " << length << ", width: " << width << ", height: " << height;
     }
 
     Box & operator = (const Box & b) {
@@ -283,7 +283,7 @@ public:
     
     virtual void print_content() {
         Box::print_content();
-        cout << ", w_length: " << w_length << ", w_width: " << w_width << ", area: " << area();
+        cout << ", w_length: " << w_length << ", w_width: " << w_width;
     }    
 };
 
@@ -356,7 +356,7 @@ public:
     
     virtual void print_content() {
         Box::print_content();
-        cout << ", h_height: " << h_height << ", area: " << area();
+        cout << ", h_height: " << h_height;
     }
 };
 
@@ -403,7 +403,7 @@ public:
     
     virtual void print_content() {
         Box::print_content();
-        cout << ", w_length: " << WBox::get_wl() << ", w_width: " << WBox::get_ww() << ", h_height: " << HBox::get_hh() << ", area: " << area();
+        cout << ", w_length: " << WBox::get_wl() << ", w_width: " << WBox::get_ww() << ", h_height: " << HBox::get_hh();
     }
 };
 
@@ -446,10 +446,12 @@ public:
     void push(T operand) {
     body[top] = operand;
     top++;
+    cout << "was pushed: " << operand << endl;
     }
     
     T pop() {
     top--;
+    cout << "was poped: " << body[top] << endl;
     return body[top];
     }
     
@@ -546,15 +548,17 @@ int main () {
     cout << " \n ------------- TESTING STACK-CLASS CONSTRUCTORS AND METHODS ------------- " << endl;
     cout << " -------------------- ('i' for int, 'd' for double) --------------------\n " << endl;
     
-    
     Stack <double> stack1;
     Stack <int> stack2(16);
     Stack <int> stack3(stack2);
     
-    stack1.push(5.5);
-    stack1.push(8.1);
-    cout << "one pop after push 5.5, 8.1 to double stack: " << stack1.pop() << endl;
+    for (int i = 1; i < 4; i++) {
+        stack1.push(i);
+    }
     
+    for (int i = 1; i < 4; i++) {
+        stack1.pop();
+    }    
     
     cout << "\n ------------------------- TESTING DESTRUCTORS  -------------------------- \n" << endl; 
     return 0;  
