@@ -41,14 +41,14 @@ public:
     
     Box(int n) {
         if (n < 0) {
-            throw range_error("paramater is negative");
+            throw range_error("parameter is negative");
         }
         length = width = height = n;
     }
     
     Box(int l, int h) {
         if (l < 0 || h < 0) {
-            throw range_error("some paramaters is negative");
+            throw range_error("some parameters is negative");
         }
         length = l;
         width = l;
@@ -57,7 +57,7 @@ public:
     
     Box(int l, int w, int h) {
         if (l < 0 || w < 0 || h < 0) {
-            throw range_error("some paramaters is negative");
+            throw range_error("some parameters is negative");
         }
         length = l;
         width = w;
@@ -88,21 +88,21 @@ public:
     
     void set_l(int m) {
         if (m < 0) {
-            throw range_error("paramater is negative");
+            throw range_error("parameter is negative");
         }
         length = m;
     }
 
     void set_w(int m) {
         if (m < 0) {
-            throw range_error("paramater is negative");
+            throw range_error("parameter is negative");
         }
         width = m;
     }
 
     void set_h(int m) {
         if (m < 0) {
-            throw range_error("paramater is negative");
+            throw range_error("parameter is negative");
         }
         height = m;
     }
@@ -154,15 +154,15 @@ public:
     Box operator -- () {
         --length;
         if (length < 0) {
-            throw range_error("paramater is negative");
+            throw range_error("parameter is negative");
         }
         --width;
         if (width < 0) {
-            throw range_error("paramater is negative");
+            throw range_error("parameter is negative");
         }
         --height;
         if (height < 0) {
-            throw range_error("paramater is negative");
+            throw range_error("parameter is negative");
         }
         Box res (*this);
     return res;
@@ -173,15 +173,15 @@ public:
         Box res (*this);
         --length;
         if (length < 0) {
-            throw range_error("paramater is negative");
+            throw range_error("parameter is negative");
         }
         --width;
         if (width < 0) {
-            throw range_error("paramater is negative");
+            throw range_error("parameter is negative");
         }
         --height;
         if (height < 0) {
-            throw range_error("paramater is negative");
+            throw range_error("parameter is negative");
         }
         return res;
     }
@@ -210,14 +210,14 @@ public:
     
     WBox(int n): Box() {
         if (n < 0) {
-            throw range_error("paramater is negative");
+            throw range_error("parameter is negative");
         }
         w_length = w_width = n;
     }
     
     WBox(int win_l, int win_w): Box() {
         if (win_l < 0 || win_w < 0) {
-            throw range_error("some paramaters is negative");
+            throw range_error("some parameters is negative");
         }
         w_length = win_l;
         w_width = win_w;
@@ -225,10 +225,10 @@ public:
     
     WBox(int n, int win_l, int win_w): Box(n) {
         if (win_l < 0 || win_w < 0) {
-            throw range_error("some paramaters is negative");
+            throw range_error("some parameters is negative");
         }
         if (win_l >= n || win_w >= n) {
-            throw range_error("paramaters of window is incorrect");
+            throw range_error("parameters of window is incorrect");
         }
         w_length = win_l;
         w_width = win_w;
@@ -236,10 +236,10 @@ public:
     
     WBox(int l, int h, int win_l, int win_w): Box(l, h) {
         if (win_l < 0 || win_w < 0) {
-            throw range_error("some paramaters is negative");
+            throw range_error("some parameters is negative");
         }
         if (win_l >= l || win_w >= h) {
-            throw range_error("paramaters of window is incorrect");
+            throw range_error("parameters of window is incorrect");
         }
         w_length = win_l;
         w_width = win_w;
@@ -247,10 +247,10 @@ public:
     
     WBox(int l, int w, int h, int win_l, int win_w): Box(l, w, h) {
         if (win_l < 0 || win_w < 0) {
-            throw range_error("some paramaters is negative");
+            throw range_error("some parameters is negative");
         }
         if (win_l >= l || win_w >= h) {
-            throw range_error("paramaters of window is incorrect");
+            throw range_error("parameters of window is incorrect");
         }
         w_length = win_l;
         w_width = win_w;
@@ -299,37 +299,37 @@ public:
     
     HBox(int n): Box() {
         if (n < 0) {
-            throw range_error("paramater is negative");
+            throw range_error("parameter is negative");
         }
         h_height = n;
     }
     
     HBox(int n, int hh): Box(n) {
         if (hh < 0) {
-            throw range_error("paramater is negative");
+            throw range_error("parameter is negative");
         }
         if (hh > n) {
-            throw range_error("paramater of head is incorrect");
+            throw range_error("parameter of head is incorrect");
         }
         h_height = hh;
     }
     
     HBox(int l, int h, int hh): Box(l, h) {
         if (hh < 0) {
-            throw range_error("paramater is negative");
+            throw range_error("parameter is negative");
         }
         if (hh > h) {
-            throw range_error("paramater of head is incorrect");
+            throw range_error("parameter of head is incorrect");
         }
         h_height = hh;
     }
     
     HBox(int l, int w, int h, int hh): Box(l, w, h) {
         if (hh < 0) {
-            throw range_error("paramater is negative");
+            throw range_error("parameter is negative");
         }
         if (hh > h) {
-            throw range_error("paramater of head is incorrect");
+            throw range_error("parameter of head is incorrect");
         }
         h_height = hh;
     }   
