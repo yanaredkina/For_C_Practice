@@ -16,7 +16,11 @@ string matrix::matrix_error::get_message() {
 
 /* default constructor */
 matrix::matrix() {
-    matrix(0.0);
+    this->rows = 1;
+    this->columns = 1;
+    this->mtrx = new double*[this->rows];
+    this->mtrx[0] = new double[this->columns];
+    this->mtrx[0][0] = 0.0;
 }
 
 /* constructor by size of matrix */

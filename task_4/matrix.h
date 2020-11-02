@@ -1,5 +1,8 @@
 /* VVO-2course - Redkina Yana - TASK "Abstract data type" - Variant 4.1 (matrix) */
 
+#ifndef __MATRIX_H__
+#define __MATRIX_H__
+
 #include <iostream>
 
 using namespace std;
@@ -71,3 +74,5 @@ public:
 };
 
 ostream& operator<<(ostream& os, const matrix& m);
+
+#endif
