@@ -5,35 +5,35 @@ int main() {
     cout << "\n ------------------- TESTING MATRIX-CLASS CONSTRUCTORS ------------------- \n" << endl;
     
     matrix M1;
-    cout << "martix M1 by default counstractor: \n" << M1 << endl;
+    cout << "matrix M1 by default constructor: \n" << M1 << endl;
     
     matrix M2(3, 4);
-    cout << "martix M2 by constructor with size (3x4): \n" << M2 << endl;
+    cout << "matrix M2 by constructor with size (3x4): \n" << M2 << endl;
     
     matrix M3(25.5);
-    cout << "martix M3 by constructor (1x1) with input value (25.5): \n" << M3 << endl;
+    cout << "matrix M3 by constructor (1x1) with input value (25.5): \n" << M3 << endl;
     
     double mas[] = {1, 3, 5, 7};
     matrix M4(mas, 4);
-    cout << "martix M4 by matrix-row constructor (mas:{1, 3, 5, 7}): \n" << M4 << endl;
+    cout << "matrix M4 by matrix-row constructor (array:{1, 3, 5, 7}): \n" << M4 << endl;
     
     matrix M5(4, mas);
-    cout << "martix M5 by matrix-column constructor (mas:{1, 3, 5, 7}): \n" << M5 << endl;
+    cout << "matrix M5 by matrix-column constructor (array:{1, 3, 5, 7}): \n" << M5 << endl;
     
     char str[] = "{{1.1, 0, -5.5}, {2.3, 1, -0.5}, {1.4, 2.5, -9.3}}";
     matrix M6(str);
-    cout << "martix M6 by string-constructor (str:{{1.1, 0, -5.5}, {2.3, 1, -0.5}, {1.4, 2.5, -9.3}}): \n" << M6 << endl;
+    cout << "matrix M6 by string-constructor (str:{{1.1, 0, -5.5}, {2.3, 1, -0.5}, {1.4, 2.5, -9.3}}): \n" << M6 << endl;
     
     matrix M7(M4);
-    cout << "martix M7 by copy-constructor (M4): \n" << M7 << endl;
+    cout << "matrix M7 by copy-constructor (M4): \n" << M7 << endl;
     
     cout << "\n ---------------------- TESTING MATRIX-CLASS METHODS --------------------- \n" << endl;
     
     matrix M8 =  matrix::identity(4);
-    cout << "creation identity matrix M8 (n=4): \n" << M8 << endl;
+    cout << "creating identity matrix M8 (n=4): \n" << M8 << endl;
     
     matrix M9 =  matrix::diagonal(mas, 4);
-    cout << "creation diagonal matrix M9 (values: {1, 3, 5, 7}, n=4): \n" << M9 << endl;
+    cout << "creating diagonal matrix M9 (values: {1, 3, 5, 7}, n=4): \n" << M9 << endl;
     
     cout << "get number of rows and columns from M8: \n" << M8.get_rows() << ", " << M8.get_columns() << '\n' << endl;
     
