@@ -129,7 +129,7 @@ public:
     }
         
     /* constructor by string*/
-    matrix(char* str_mtrx) {
+    matrix(char * str_mtrx) {
         int count_bracket = 0;
         int count_comma = 0;
         for (int i = 0; str_mtrx[i] != '\0'; i++) {
@@ -143,7 +143,6 @@ public:
         int count_of_rows = (count_bracket - 2) / 2;
         int count_of_columns = (count_comma - count_of_rows + 1) / count_of_rows + 1;
         
-
         this->rows = count_of_rows;
         this->columns = count_of_columns;
         
@@ -152,69 +151,61 @@ public:
             this->mtrx[i] = new double[this->columns];
         }
         
-        int i = 0;
-        int j = 0;
-        enum number {int_part, frac_part};
-        enum number state = int_part;
-        int ip = 0;
-        double fp = 0.0;
-        char sign = '+';
-        double number = 0;
-        int count_fp = 10;
         
-        for (int k = 0; str_mtrx[k] != '\0'; k++) {
-            switch(str_mtrx[k]) {
-                case '{': 
-                    break;
-                case '.' : 
-                    state = frac_part; 
-                    break;
-                case '-': 
-                    sign = '-';
-                    break;
-                case '+':
-                    sign = '+';
-                    break;
-                case '0':
-                case '1':
-                case '2':
-                case '3':
-                case '4':
-                case '5':
-                case '6':
-                case '7':
-                case '8':
-                case '9':
-                    if (state == int_part) {
-                        ip = ip * 10 + (str_mtrx[k] - '0');
-                    } else if (state == frac_part) {
-                        fp = fp + (double)(str_mtrx[k] - '0') / count_fp;
-                        count_fp *= 10;
-                    } 
-                    break;
-                case '}':
-                case ',': {
-                    if (sign == '-') {
-                        number = (ip + fp) * -1;
-                    } else {
-                        number = (ip + fp);
+        int k = 0;
+        for (int i = 0; i < count_of_rows; i++) {
+            for (int j = 0; j < count_of_columns; j++) {
+                enum number {int_part, frac_part};
+                enum number state = int_part;
+                int ip = 0;
+                double fp = 0.0;
+                char sign = '+';
+                double number = 0;
+
+                int count_fp = 10;
+                for (; (str_mtrx[k] != ',') && (str_mtrx[k] != '}'); k++) {
+                    switch(str_mtrx[k]) {
+                        case '{': 
+                            break;
+                        case '.' : 
+                            state = frac_part; 
+                            break;
+                        case '-': 
+                            sign = '-';
+                            break;
+                        case '+':
+                            sign = '+';
+                            break;
+                        case '0':
+                        case '1':
+                        case '2':
+                        case '3':
+                        case '4':
+                        case '5':
+                        case '6':
+                        case '7':
+                        case '8':
+                        case '9':
+                            if (state == int_part) {
+                                ip = ip * 10 + (str_mtrx[k] - '0');
+                            } else if (state == frac_part) {
+                                fp = fp + (double)(str_mtrx[k] - '0') / count_fp ;
+                                count_fp *= 10;
+                            } 
+                            break;
                     }
-                    if (str_mtrx[k + 1] == ',') {
-                        k++;
-                    }
-                    this->mtrx[i][j] = number;
-                    state = int_part;
-                    ip = 0;
-                    fp = 0.0;
-                    sign = '+';
-                    count_fp = 10;
-                    j++;
-                    if (j == this->columns) {
-                        j = 0;
-                        i++;
-                    }
-                    break;
                 }
+                if (sign == '-') {
+                    number = (ip + fp) * -1;
+                } else {
+                    number = (ip + fp);
+                }
+                if (str_mtrx[++k] == ',') {
+                    k++;
+                } else {
+                    k++;
+                }
+                this->mtrx[i][j] = number;
             }
         }
     }
