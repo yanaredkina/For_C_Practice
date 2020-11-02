@@ -72,7 +72,7 @@ int main() {
     try {
         cout << "trying creation matrix err1(5, -2) with negative number of columns:" << endl;
         matrix err1(5, -2);
-        cout << "error matrix was created" << endl;
+        cerr << "error matrix was created" << endl;
     } catch (matrix::matrix_error& e) {
         cout << "ERROR " << e.get_message() << '\n' <<endl;
     }
@@ -80,7 +80,7 @@ int main() {
     try {
         cout << "trying to set a value in (i,j)-element, that out of range of matrix:" << endl;
         M10.set_elem(5, 10, 5);
-        cout << "value was assigned to not exist element" << endl;
+        cerr << "value was assigned to not exist element" << endl;
     } catch (matrix::matrix_error& e) {
         cout << "ERROR " << e.get_message() << '\n' << endl;
     }
@@ -88,7 +88,7 @@ int main() {
     try {
         cout << "trying to assign matrix of different sizes ( M10(2x3) = M9(4x4) ):" << endl;
         M10 = M9;
-        cout << "matrix was successful assigned" << endl;
+        cerr << "matrix was successful assigned" << endl;
     } catch (matrix::matrix_error& e) {
         cout << "ERROR " << e.get_message() << '\n' << endl;
     }
@@ -96,7 +96,7 @@ int main() {
     try {
         cout << "trying to copy matrix-column from matrix M10 (2x3) with i = 4):" << endl;
         M10[4];
-        cout << "matrix was successful copied" << endl;
+        cerr << "matrix was successful copied" << endl;
     } catch (matrix::matrix_error& e) {
         cout << "ERROR " << e.get_message() << '\n' << endl;
     }
