@@ -188,7 +188,7 @@ public:
                     if (state == int_part) {
                         ip = ip * 10 + (str_mtrx[k] - '0');
                     } else if (state == frac_part) {
-                        fp = fp + (double)(str_mtrx[k] - '0') / count_fp ;
+                        fp = fp + (double)(str_mtrx[k] - '0') / count_fp;
                         count_fp *= 10;
                     } 
                     break;
@@ -207,15 +207,11 @@ public:
                     ip = 0;
                     fp = 0.0;
                     sign = '+';
-                    number = 0;
                     count_fp = 10;
-                    if (j >= this->columns) {
+                    j++;
+                    if (j == this->columns) {
                         j = 0;
-                        if (i < this->rows) {
-                            i++;
-                        } 
-                    } else {
-                        j++;
+                        i++;
                     }
                     break;
                 }
