@@ -1,3 +1,5 @@
+/* VVO-2course - Redkina Yana - TASK "Abstract data type" - Variant 4.1 (matrix) */
+
 #include "matrix.h"
 
 int main() {
