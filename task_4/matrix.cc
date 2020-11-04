@@ -189,9 +189,10 @@ matrix::~matrix() {
         delete[] this->mtrx[i];
     }
     delete[] this->mtrx;
+    this->mtrx = NULL;
 } 
 
-/* creation identity matrix*/
+/* creation identity matrix (static function) */
 matrix matrix::identity(int n) {
     if (n < 0) {
         throw matrix_error("number of rows out of range");
@@ -203,7 +204,7 @@ matrix matrix::identity(int n) {
     return res;
 }
 
-/* creation diagonal matrix*/
+/* creation diagonal matrix (static function) */
 matrix matrix::diagonal(double* vals, int n) {
     if (n < 0) {
         throw matrix_error("number of rows out of range");
